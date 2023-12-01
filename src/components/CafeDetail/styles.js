@@ -14,13 +14,18 @@ export const CafeDetailContainer = styled.div`
   align-items: center;
 `;
 
-export const CafeImg = styled.img`
+export const CafeImgContainer = styled.div`
   width: 80%;
   height: 500px;
   border-radius: 50px;
-  box-shadow: 0px 0px 15px -6px;
-  object-fit: cover;
   margin-bottom: 50px;
+`;
+
+export const CafeImg = styled.img`
+  width: 100%;
+  height: 100%;
+  border-radius: 50px;
+  box-shadow: 0px 0px 15px -6px;
 `;
 
 export const TopContainer = styled.div`
@@ -41,28 +46,25 @@ export const TopContainer = styled.div`
 export const CafeInfoContainer = styled.article`
   justify-self: center;
   width: 90%;
-  .menu {
-    line-height: 100%;
-  }
 `;
 
-export const CafeInfo = styled.p`
+export const CafeInfo = styled.article`
   font-size: 20px;
   padding: 15px;
+  line-height: 130%;
 `;
 
 export const WriteReviewBtn = styled.button`
   display: flex;
-  margin: 0 10px;
+  margin-right: 10px;
   padding: 10px 15px;
   font-size: 18px;
   background-color: var(--main-yellow-color);
   border-radius: 16px;
-  transition: 0.5s;
-  align-items: center;
 
   &:hover {
     background-color: #ffe794;
+    transition: 0.5s;
   }
   svg {
     margin-left: 5px;
@@ -84,21 +86,12 @@ export const CafeMiniTitle = styled.h3`
 export const InfoMiniContainer = styled.article`
   box-shadow: 0px 0px 10px -6px;
   padding: 20px;
-  margin: 20px 0;
+  margin: 10px 0;
   background-color: #fef9ea;
   border-radius: 16px;
-  white-space: pre-wrap;
-  line-height: 200%;
 
   .reviewContainer {
     padding: 10px;
-  }
-
-  .noReview {
-    padding: 50px;
-    text-align: center;
-    font-weight: bold;
-    font-size: large;
   }
 `;
 

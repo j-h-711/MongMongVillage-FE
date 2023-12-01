@@ -2,7 +2,6 @@ import { instance } from '.';
 import { useNavigate } from 'react-router-dom';
 import { useMutation, useQueryClient } from 'react-query';
 import { ROUTE } from '../routes/Routes';
-import { showAlert } from '../util/showAlert';
 
 const postReview = async (title, content, rating, images, cafe_id) => {
   const formData = new FormData();
@@ -29,25 +28,18 @@ export function usePostReview(title, content, rating, images, cafe_id) {
     () => postReview(title, content, rating, images, cafe_id),
     {
       onSuccess: (response) => {
-        showAlert('', '리뷰가 정상적으로 등록되었습니다.', 'success', () => {
-          navigate(ROUTE.REVIEW_DETAIL_PAGE.link + `/${response?._id}`);
-          window.scrollTo({ top: 0, left: 0 });
-        });
+        alert('리뷰가 정상적으로 등록되었습니다.');
         queryClient.invalidateQueries(
           ['getReviews', 'latest', 1],
           ['myReviews'],
         );
+        navigate(ROUTE.REVIEW_DETAIL_PAGE.link + `/${response?._id}`);
+        window.scrollTo({ top: 0, left: 0 });
       },
 
       onError: (error) => {
         console.error(error);
-        showAlert(
-          '',
-          error.response.data.message + '리뷰를 등록할 수 없습니다.',
-          'error',
-          () => {},
-        );
-        alert();
+        alert(error.response.data.message);
       },
     },
   );

@@ -25,8 +25,6 @@ import { PiEyeBold, PiEyeClosedBold } from 'react-icons/pi';
 import { getCheckNickname } from '../../hooks/getCheckNickname';
 import { getCheckEmail } from '../../hooks/getCheckEmail';
 
-import { showAlert } from '../../util/showAlert';
-
 const SignUpPage = () => {
   const [signUpInfo, setSignUpInfo] = useState({
     email: '',
@@ -54,17 +52,17 @@ const SignUpPage = () => {
 
   const submitSignUp = () => {
     if (signUpStatus.emailInputStatus !== InputStatus.SUCCESS) {
-      showAlert('', '이메일을 다시 확인해주세요.', 'error', () => {});
+      alert('이메일을 다시 확인해주세요.');
     } else if (signUpStatus.passwordInputStatus !== InputStatus.SUCCESS) {
-      showAlert('', '비밀번호를 다시 확인해주세요.', 'error', () => {});
+      alert('비밀번호를 다시 확인해주세요.');
     } else if (
       signUpStatus.confirmPasswordInputStatus !== InputStatus.SUCCESS
     ) {
-      showAlert('', '비밀번호가 일치하지 않습니다.', 'error', () => {});
+      alert('비밀번호가 일치하지 않습니다. ');
     } else if (signUpStatus.nicknameInputStatus !== InputStatus.SUCCESS) {
-      showAlert('', '닉네임을 다시 확인해주세요.', 'error', () => {});
+      alert('닉네임을 다시 확인해주세요.');
     } else if (signUpStatus.checkboxInputStatus !== InputStatus.SUCCESS) {
-      showAlert('', '약관에 동의해주세요.', 'error', () => {});
+      alert('약관에 동의해주세요.');
     } else {
       mutate();
     }

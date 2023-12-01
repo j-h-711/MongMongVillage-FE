@@ -14,7 +14,6 @@ export const Title = styled.p`
 
 export const Content = styled.p`
   color: gray;
-  line-height: 2;
 
   text-overflow: ellipsis;
   overflow: hidden;

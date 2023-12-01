@@ -2,7 +2,6 @@ import { useNavigate } from 'react-router-dom';
 import { instance } from '.';
 import { useMutation, useQueryClient } from 'react-query';
 import { ROUTE } from '../routes/Routes';
-import { showAlert } from '../util/showAlert';
 
 const patchUserInfo = async (nickname, introduction, profilePicture) => {
   const formData = new FormData();
@@ -25,19 +24,14 @@ export function usePatchUserInfo(nickname, introduction, profilePicture) {
     () => patchUserInfo(nickname, introduction, profilePicture),
     {
       onSuccess: () => {
-        showAlert('', '회원 정보가 수정되었습니다.', 'success', () => {
-          queryClient.invalidateQueries(['userInfo' + userId]);
-          navigate(ROUTE.MY_PAGE.link);
-          window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
-        });
+        alert('회원 정보가 수정되었습니다.');
+        queryClient.invalidateQueries(['userInfo' + userId]);
+        navigate(ROUTE.MY_PAGE.link);
+        window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
       },
 
       onError: (error) => {
-        showAlert(
-          '',
-          error.response.data.error + '회원정보 수정을 할 수 없습니다.',
-          'error',
-        );
+        alert(error.response.data.error + '회원정보 수정을 할 수 없습니다.');
       },
     },
   );

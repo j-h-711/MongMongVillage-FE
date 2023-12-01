@@ -1,6 +1,5 @@
 import { instance } from '.';
 import { useQuery } from 'react-query';
-import { showAlert } from '../util/showAlert';
 
 const getMyLike = async () => {
   const response = await instance.get(`/boards/mypage/user/liked`);
@@ -13,12 +12,7 @@ export function useGetMyLike() {
   return useQuery(['myLike'], () => getMyLike(), {
     enabled: !!userId,
     onError: (error) => {
-      showAlert(
-        '',
-        error + '내 좋아요 조회를 할 수 없습니다.',
-        'error',
-        () => {},
-      );
+      alert(error, '내 좋아요 조회를 할 수 없습니다.');
     },
   });
 }

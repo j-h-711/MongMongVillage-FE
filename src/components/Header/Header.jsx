@@ -3,7 +3,6 @@ import { useState, useEffect } from 'react';
 import { Container, Navbar, Navitem, Space } from './styles';
 import Logo from '../Logo/Logo';
 import { ROUTE } from '../../routes/Routes';
-import { showAlert } from '../../util/showAlert';
 
 const Header = () => {
   const navigate = useNavigate();
@@ -22,11 +21,9 @@ const Header = () => {
   };
 
   const handleLogout = () => {
-    showAlert('Logout', '로그아웃 되었습니다.', 'success', () => {
-      localStorage.clear();
-      navigate(ROUTE.MAIN_PAGE.link);
-      window.location.reload();
-    });
+    localStorage.clear();
+    window.location.reload();
+    alert('로그아웃되었습니다.');
   };
 
   const checkTokenValid = async (token) => {
@@ -62,15 +59,9 @@ const Header = () => {
         const isValid = await checkTokenValid(token);
 
         if (!isValid) {
-          showAlert(
-            '',
-            '토큰이 유효하지 않습니다. 재로그인이 필요합니다.',
-            'error',
-            () => {
-              navigate(ROUTE.LOGIN_PAGE.link);
-              handleLogout();
-            },
-          );
+          alert('토큰이 유효하지 않습니다. 재로그인이 필요합니다.');
+          navigate(ROUTE.LOGIN_PAGE.link);
+          handleLogout();
         }
       }
     };
@@ -137,19 +128,17 @@ const Header = () => {
         </Navitem>
         {token ? (
           <>
-            <Space style={{ width: '25%' }} />
+            <Space style={{ width: isAdmin ? '13%' : '25%' }} />
             {isAdmin && <span className="admin">관리자님, 반갑습니다.</span>}
-            {!isAdmin && (
-              <Navitem
-                id="mypage"
-                className={activeHeader === ROUTE.MY_PAGE.link ? 'active' : ''}
-                onClick={() => {
-                  handleClick(ROUTE.MY_PAGE.link);
-                }}
-              >
-                마이페이지
-              </Navitem>
-            )}
+            <Navitem
+              id="mypage"
+              className={activeHeader === ROUTE.MY_PAGE.link ? 'active' : ''}
+              onClick={() => {
+                handleClick(ROUTE.MY_PAGE.link);
+              }}
+            >
+              마이페이지
+            </Navitem>
             <Navitem
               id="logout"
               onClick={() => {

@@ -1,27 +1,20 @@
+import { useNavigate } from 'react-router-dom';
 import { instance } from '.';
 import { useQuery } from 'react-query';
-import { showAlert } from '../util/showAlert';
+import { ROUTE } from '../routes/Routes';
 
 const getReview = async (id) => {
-  try {
-    const response = await instance.get(`/reviews/${id}`);
-    if (response?.data?.data?.review) {
-      return response.data.data.review;
-    } else {
-      throw new Error('No review data found');
-    }
-  } catch (error) {
-    throw error;
-  }
+  const response = await instance.get(`/reviews/${id}`);
+  if (response?.data?.data?.review) return response.data.data.review;
 };
 
 export function useGetReview(id) {
+  const navigate = useNavigate();
+
   return useQuery(['getReview' + id], () => getReview(id), {
-    retry: false,
-    onError: () => {
-      showAlert('', '존재하지 않는 데이터입니다.', 'warning', () =>
-        window.history.back(),
-      );
+    onError: (error) => {
+      alert('해당 리뷰 데이터가 존재하지 않습니다.');
+      navigate(ROUTE.REVIEW_LIST_PAGE.link);
     },
   });
 }

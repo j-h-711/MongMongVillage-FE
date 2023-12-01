@@ -43,10 +43,14 @@ const CommunitySearchAndPost = ({
             />
           </SearchInputBox>
         </SearchContainer>
-        <PostBTN onClick={handleNewPostClick}>
-          글작성
-          <FaPencilAlt />
-        </PostBTN>
+        {user ? (
+          <PostBTN onClick={handleNewPostClick}>
+            글작성
+            <FaPencilAlt />
+          </PostBTN>
+        ) : (
+          <></>
+        )}
       </SearchAndPostContainer>
     </>
   );

@@ -1,6 +1,5 @@
 import { instance } from '.';
 import { useMutation } from 'react-query';
-import { showAlert } from '../util/showAlert';
 
 const getCommunitySearch = async (searchTerm, currentPage) => {
   try {
@@ -22,7 +21,7 @@ const getCommunitySearch = async (searchTerm, currentPage) => {
 export function useGetCommunitySearch(searchTerm, currentPage) {
   return useMutation(() => getCommunitySearch(searchTerm, currentPage), {
     onError: (error) => {
-      showAlert('', '검색된 게시글이 없습니다.', 'warning', () => {});
+      alert('검색된 게시글이 없습니다.');
       console.error('Failed to fetch search Content:', error.message);
     },
   });
