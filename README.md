@@ -11,7 +11,7 @@
 2023.11 ~ 2023.01
 
 ## 배포주소
-https://www.mongmongvillage.store/
+https://www.mongmongvillage.store
 
 ## 테스트 계정
 ```
